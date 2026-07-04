@@ -10,11 +10,11 @@ import uuid
 
 from flask import Flask, jsonify, request
 
+from confidence_scorer import calculate_confidence
 from llm_detector import get_llm_ai_score
+from stylometric_detector import get_stylometric_ai_score
 from services.audit import log_submission, read_entries
 
-# TODO(Milestone 4): import the stylometric detector (Signal 2).
-# TODO(Milestone 4): import the confidence scorer that averages the two signals.
 # TODO(Milestone 5): import the transparency label generator.
 
 app = Flask(__name__)
@@ -41,19 +41,18 @@ def submit():
 
     content_id = str(uuid.uuid4())
 
-    # Signal 1: LLM classifier AI-likelihood score in [0.0, 1.0].
+    # Two independent detection signals, each an AI-likelihood score in
+    # [0.0, 1.0] (0.0 = appears human-written, 1.0 = appears AI-generated).
+    # Signal 1: LLM classifier.
     llm_score = get_llm_ai_score(text)
+    # Signal 2: stylometric heuristics.
+    stylometric_score = get_stylometric_ai_score(text)
 
-    # TODO(Milestone 4): Run Signal 2 (stylometric detector) on the text.
-    # TODO(Milestone 4): Combine the two AI-likelihood scores into a confidence score.
+    # Confidence scorer: averages the two signals (they contribute equally)
+    # and derives the attribution result from the combined confidence score.
+    confidence, attribution = calculate_confidence(llm_score, stylometric_score)
+
     # TODO(Milestone 5): Generate the transparency label from the confidence score.
-
-    # Temporary attribution based solely on Signal 1 until confidence scoring
-    # (Milestone 4) combines both signals.
-    attribution = "likely_ai" if llm_score >= 0.5 else "likely_human"
-
-    # Placeholder until confidence scoring is implemented (Milestone 4).
-    confidence = 0.0
 
     # Record one structured decision entry in the audit log.
     log_submission(
@@ -62,6 +61,7 @@ def submit():
         attribution=attribution,
         confidence=confidence,
         llm_score=llm_score,
+        stylometric_score=stylometric_score,
     )
 
     return jsonify({

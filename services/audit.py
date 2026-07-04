@@ -33,18 +33,28 @@ def read_entries():
             return []
 
 
-def log_submission(content_id, creator_id, attribution, confidence, llm_score):
+def log_submission(
+    content_id,
+    creator_id,
+    attribution,
+    confidence,
+    llm_score,
+    stylometric_score,
+):
     """Append one structured audit entry for a successful submission.
 
-    Returns the entry that was written.
+    Records both detection signals (``llm_score`` and ``stylometric_score``)
+    alongside the combined ``confidence`` and final ``attribution`` so the log
+    captures the complete submission flow. Returns the entry that was written.
     """
     entry = {
         "content_id": content_id,
         "creator_id": creator_id,
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "attribution": attribution,
-        "confidence": confidence,
         "llm_score": llm_score,
+        "stylometric_score": stylometric_score,
+        "confidence": confidence,
+        "attribution": attribution,
         "status": "classified",
     }
 

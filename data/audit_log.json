@@ -16,5 +16,71 @@
     "confidence": 0.0,
     "llm_score": 0.1,
     "status": "classified"
+  },
+  {
+    "content_id": "d06b4ae7-6f5e-4ff4-b835-21b5bf9e3c10",
+    "creator_id": "test-creator",
+    "timestamp": "2026-07-04T18:27:44.099165+00:00",
+    "attribution": "uncertain",
+    "confidence": 0.6897058823529412,
+    "llm_score": 0.8,
+    "status": "classified"
+  },
+  {
+    "content_id": "0c64c53f-0287-475e-ac7a-c958c6a1ec8b",
+    "creator_id": "test-creator",
+    "timestamp": "2026-07-04T18:28:45.739329+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.20410780311651505,
+    "llm_score": 0.1,
+    "status": "classified"
+  },
+  {
+    "content_id": "039e7902-08d2-4f86-be86-b562a199e755",
+    "creator_id": "test-creator",
+    "timestamp": "2026-07-04T18:28:46.693757+00:00",
+    "attribution": "uncertain",
+    "confidence": 0.39884408602150534,
+    "llm_score": 0.42,
+    "status": "classified"
+  },
+  {
+    "content_id": "d34b0f76-97a0-4e2e-8ee0-ba28d050bde2",
+    "creator_id": "test-creator",
+    "timestamp": "2026-07-04T18:28:47.922307+00:00",
+    "attribution": "likely_human",
+    "confidence": 0.19465722205539104,
+    "llm_score": 0.2,
+    "status": "classified"
+  },
+  {
+    "content_id": "1ad24aac-ad82-4c92-8a8b-deeb56544e16",
+    "creator_id": "test-creator",
+    "timestamp": "2026-07-04T18:32:41.104718+00:00",
+    "llm_score": 0.8,
+    "stylometric_score": 0.44999999999999996,
+    "confidence": 0.625,
+    "attribution": "uncertain",
+    "status": "classified"
+  },
+  {
+    "content_id": "6c6bb321-6c42-4ff3-8f89-5dfb53be7d99",
+    "creator_id": "test-creator",
+    "timestamp": "2026-07-04T18:32:41.791017+00:00",
+    "llm_score": 0.1,
+    "stylometric_score": 0.33152713798030164,
+    "confidence": 0.2157635689901508,
+    "attribution": "likely_human",
+    "status": "classified"
+  },
+  {
+    "content_id": "c20b7d7b-a548-4b40-a514-7d9725fc2578",
+    "creator_id": "test-creator",
+    "timestamp": "2026-07-04T18:32:42.324600+00:00",
+    "llm_score": 0.42,
+    "stylometric_score": 0.25740740740740736,
+    "confidence": 0.3387037037037037,
+    "attribution": "uncertain",
+    "status": "classified"
   }
 ]
