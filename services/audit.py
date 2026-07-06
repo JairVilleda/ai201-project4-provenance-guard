@@ -64,3 +64,28 @@ def log_submission(
         json.dump(entries, f, indent=2)
 
     return entry
+
+
+def record_appeal(content_id, appeal_reasoning):
+    """Record a creator's appeal on an existing submission entry.
+
+    Locates the entry by ``content_id`` and, in place, changes its ``status``
+    from ``"classified"`` to ``"under_review"`` and stores the creator's
+    ``appeal_reasoning`` (plus an ``appeal_timestamp``). The original detector
+    scores, confidence, and attribution are left untouched — per the Appeals
+    Workflow, an appeal never reclassifies the content.
+
+    Returns the updated entry, or ``None`` if no entry matches ``content_id``.
+    """
+    entries = read_entries()
+
+    for entry in entries:
+        if entry.get("content_id") == content_id:
+            entry["status"] = "under_review"
+            entry["appeal_reasoning"] = appeal_reasoning
+            entry["appeal_timestamp"] = datetime.now(timezone.utc).isoformat()
+            with open(LOG_PATH, "w") as f:
+                json.dump(entries, f, indent=2)
+            return entry
+
+    return None
